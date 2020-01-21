@@ -1,0 +1,77 @@
+@import "reset";
+@import url('https://fonts.googleapis.com/css?family=Chonburi|Limelight|Poppins|Raleway|Roboto+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+  
+body{
+    height: 100%;
+    // background: url(https://images.unsplash.com/photo-1492232093388-4d9d123d362d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80);
+    background-image: url(../resources/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ul{
+        display: flex;
+        flex-direction: row;
+        li{
+            display: flex;
+            margin: 1rem; 
+            a{
+                text-decoration: none;
+                color: whitesmoke;
+                font-family: 'Poppins', sans-serif;
+                &:hover {
+                    // color: rgba(50, 50, 50, 0.25);
+                    background-color: rgba(64, 147, 161, 0.4);
+                    padding: .5rem;
+                    border: 1px solid whitesmoke;
+                }
+            }
+        }
+    }
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1{
+        color: whitesmoke;
+        font-size: 40px;
+        padding-top: 10rem;
+        padding-bottom: 2rem;
+        // font-family: 'Limelight', cursive;
+        font-family: 'Chonburi', cursive;
+    }
+    button{
+        background-color: inherit;
+        padding: 1rem 2rem;
+        margin: 1rem;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        &:hover {
+            background-color: rgba(64, 147, 161, 0.4);
+            box-shadow: 0px 15px 20px black;
+            color: #fff;
+            transform: translateY(-7px);
+          }
+    }
+}
+
+
+// font-family: 'Chonburi', cursive;
+// font-family: 'Limelight', cursive;
+// font-family: 'Roboto Mono', monospace;
+// font-family: 'Raleway', sans-serif;
+// font-family: 'Poppins', sans-serif;

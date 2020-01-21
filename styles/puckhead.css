@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css?family=Chonburi|Limelight|Poppins|Raleway|Roboto+Mono&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  background-image: url(../resources/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem;
+  color: whitesmoke;
+}
+header h1 {
+  font-size: 40px;
+  font-family: "Chonburi", cursive;
+}
+header a {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  padding: 2rem;
+  min-height: 30rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+.category-dropdown {
+  font-size: 13px;
+  padding: 10px 8px 10px 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.category-dropdown .select {
+  width: 120%;
+  background-image: url(../resources/arrow2.png);
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  background-position: 80% center;
+}
+
+.category-dropdown .select select {
+  background: transparent;
+  line-height: 1;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  width: 120%;
+  position: relative;
+  z-index: 10;
+  font-size: 1em;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+#draggable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 1rem;
+  color: inherit;
+  background-color: whitesmoke;
+  border-radius: 8px;
+}
+
+.word-holder {
+  display: flex;
+  flex-direction: row;
+}
+
+#my-word {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dropzone {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: black;
+  opacity: 50%;
+  border-radius: 8px;
+  color: whitesmoke;
+  font-size: 20px;
+}
+
+.space {
+  margin: 1rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.helpers {
+  visibility: hidden;
+}
+
+.hint {
+  background-image: url("https://cdn4.iconfinder.com/data/icons/online-shopping-glyph-part-1/33/find-512.png");
+  background-repeat: no-repeat;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-size: contain;
+  border-radius: 12px;
+}
+
+.hint-card {
+  visibility: hidden;
+}
+
+.clue {
+  background-image: url("https://icons-for-free.com/iconfiles/png/512/idea+idea+bulb+light+bulb+icon-1320144733751939202.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 12px;
+}
+
+.reset {
+  background-image: url("https://img.icons8.com/plasticine/2x/recurring-appointment.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 12px;
+}
+
+img {
+  height: 20rem;
+}
+
+.img-div {
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=puckhead.css.map */

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/airhockey.css">
+    <script src="airhockey.js"></script>
+    <title>Muppet Hockey</title>
+</head>
+<body>
+
+    <header>
+        <a href="http://localhost:3001/">Home</a>
+        <h1>Muppet Hockey</h1>
+        <h2></h2>
+    </header>
+
+    <main>
+        <div class="table">
+            <div class="table-inner">
+                <span class="goal-crease circle"></span>
+                <span class="faceoff faceoff-top-left circle"></span>
+                <span class="faceoff faceoff-bottom-left circle"></span>
+                <span class="blue-line"></span>
+                <span class="center-line"></span>
+                <span class="circle"></span>
+                <span class="blue-line blue-line-two"></span>
+                <span class="faceoff faceoff-top-right circle"></span>
+                <span class="faceoff faceoff-bottom-right circle"></span>
+                <span class="goal-crease goal-crease-two circle"></span>
+            </div>
+        </div>
+        <canvas id="canvas" class="table table-canvas" tabindex="0"></canvas>
+        
+        <!-- <div class="message-board">
+            <p>write a starting mesaage here</p>
+            <p>use arrow keys to move up, down, right & left</p>
+            <button class="start">Start!</button>
+        </div> -->
+     </main>
+</body>
+</html>
