@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", postLoad);
 
 const playerURL = "http://localhost:3000/players";
+const gameURL = "http://localhost:3000/puckhead_games";
 
 let allPlayers;
 let category;
@@ -8,15 +9,24 @@ let selectedPlayers;
 let answer;
 let myletters = [];
 let buttons;
+let buttonHolder;
 let wordHolder;
 let hintCard;
 let helpers;
 let list;
 let counter2 = 0;
-let correct
+let correct;
+let myHints;
+let points = 0;
 
 function postLoad() {
     dropdown = document.getElementById("dropdown");
+
+        // const currentUser = localStorage.getItem('name')
+        // const currentToken = localStorage.getItem('token')
+
+        // console.log(currentUser)
+        // console.log(currentToken)
     
     fetch(playerURL)
         .then(parseJSON)
@@ -73,12 +83,21 @@ function filterPlayers(player){
 }
 
 function startGame(selectedPlayer){
-
+    console.log("players", selectedPlayers)
+    createPoints();
     createVariables(selectedPlayer);
     dragEvents();
+
     const hintButton = document.querySelector('.hint')
+    const resetButton = document.querySelector('.reset')
 
     hintButton.addEventListener('click', showHint)
+    resetButton.addEventListener('click', () => resetPlayer(selectedPlayer))
+}
+
+function createPoints(){
+    let myPoints = document.querySelector('.my-points')
+    myPoints.textContent = `Total Points: ${points}`
 }
 
 function createVariables(player){
@@ -91,11 +110,10 @@ function createVariables(player){
     console.log("answer", answer)
 }
 
-function displayPlayer(pl){
+function displayPlayer(player){
     const image = document.querySelector('img')
-    image.src = pl
+    image.src = player
     image.style.border = `2px solid whitesmoke`
-    console.log(pl)
 }
 
 function correctName(surname){
@@ -110,7 +128,11 @@ function createLetters(answer){
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-    buttons = document.querySelector('.buttons');
+    buttonHolder = document.querySelector('.button-holder');
+    buttons = document.createElement('div');
+    buttons.className = 'buttons';
+    buttonHolder.appendChild(buttons)
+
     let counter = 0
 
     for (i = 0; i < answer.length; i++){
@@ -128,7 +150,6 @@ function createLetters(answer){
 
     let newletters = shuffle(myletters)
     newletters.map(addLetter)
-
 }
 
 function shuffle(array){
@@ -166,14 +187,13 @@ function createGuessHolder(newAnswer){
         guess = document.createElement('span')
 
         if (newAnswer[i] === " "){
-            guess.innerHTML = " "
-            guess.setAttribute('class', 'space');
-            space = 1
+            guess.textContent = " "
+            guess.setAttribute('class', 'space dropzone');
+            guess.id = "filled"
         } else {
             guess.setAttribute('class', 'dropzone');
             guess.id = ""
         }
-
         wordHolder.appendChild(correct);
         correct.appendChild(guess);
     }
@@ -181,13 +201,23 @@ function createGuessHolder(newAnswer){
 
 function createHints(player){
     hintCard = document.querySelector('.hint-card')
+    myHints = document.createElement('div')
     let hint1 = document.createElement('p')
     let hint2 = document.createElement('p')
 
     hint1.textContent = `Primary Position: ${player.primaryPosition}`
     hint2.textContent = `Primary Number: ${player.primaryNumber}`
 
-    hintCard.append(hint1, hint2)
+    hintCard.append(myHints)
+    myHints.append(hint1, hint2)
+}
+
+function resetPlayer(player){
+    correct.remove()
+    buttons.remove()
+    myletters = []
+    createVariables(player)
+    console.log(selectedPlayers)
 }
 
 // function createClues(player){
@@ -229,7 +259,7 @@ function dragEvents(){
         event.preventDefault();
         if (event.target.className == "dropzone") {
             event.target.style.background = "";
-            dragged.parentNode.removeChild( dragged );
+            dragged.style.visibility = "hidden"
 
             event.target.textContent =  dragged.textContent
             event.target.id =  "filled"
@@ -252,17 +282,46 @@ function check(){
     if (filledSet.size === 1) {
         dropzoneId = dropzoneId.map(id => id.textContent)
         if (dropzoneId.join() === answer.join()){
-            // correct.parentNode.removeChild(correct);
-            // buttons.parentNode.removeChild(buttons);
-            // counter2 = counter2 + 1
-            // startGame(selectedPlayers[counter2])
-            console.log("FUCK Yes!")
-            console.log("selectedP2", selectedPlayers)
-        } else{
-            console.log("you stupid")
+            if ((counter2 + 1) === selectedPlayers.length){
+                points = points + answer.length
+                createPoints();
+                gameOver(points);
+                console.log("game winner")
+            } else {
+                console.log("FUCK Yes!")
+                console.log("game", selectedPlayers.length)
+                correct.remove()
+                buttons.remove()
+                myletters = []
+                myHints.remove()
+                points = points + answer.length
+                
+                counter2 = counter2 + 22
+                startGame(selectedPlayers[counter2])
+            }
         }
     }
-// my-word, buttons
+}
+
+function gameOver(){
+    const game = document.querySelector('.game')
+    const playerImage = document.querySelector('.img-div')
+    
+    game.style.backgroundImage = `url('https://i.gifer.com/BVWu.gif')`
+    game.style.backgroundRepeat = 'no-repeat'
+    game.style.backgroundSize = 'cover'
+    playerImage.style.visibility = "hidden"
+    helpers.style.visibility = "hidden"
+
+    correct.remove()
+    buttons.remove()
+    myletters = []
+    myHints.remove()
+    
+    const id = localStorage.getItem('id')
+    const body = JSON.stringify({ puckhead_game: { user_id: id, points}})
+    
+    fetchCall(gameURL, 'POST', body)
 }
 
 
@@ -280,7 +339,7 @@ function unNest(element) {
     return element;
 }
 
-// function fetchCall(url, method, body) {
-//     const headers = { "Content-Type": "application/json" }
-//     return fetch(url, { method, headers, body })
-// }
+function fetchCall(url, method, body) {
+    const headers = { "Content-Type": "application/json" }
+    return fetch(url, { method, headers, body })
+}

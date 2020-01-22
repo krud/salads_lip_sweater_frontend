@@ -62,6 +62,7 @@ body {
 }
 
 header {
+  visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,20 +119,48 @@ form {
   padding-top: 25%;
   padding-bottom: 25%;
   background-color: rgba(232, 230, 239, 0.69);
-  border: 3px solid red;
-  display: none;
+  font-family: "Poppins", sans-serif;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 form label {
   font-size: 40px;
-  font-family: "Poppins", sans-serif;
   color: #444c53;
+}
+form input {
+  width: 30%;
+  height: 15%;
+  margin: 1rem;
+  font-size: 20px;
+}
+
+#sign-up {
+  visibility: hidden;
+}
+
+#login {
+  visibility: hidden;
 }
 
 .logout {
   display: none;
+}
+
+.button {
+  background-color: inherit;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.button:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
 }
 
 /*# sourceMappingURL=main.css.map */
