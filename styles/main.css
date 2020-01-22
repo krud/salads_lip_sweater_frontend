@@ -56,15 +56,17 @@ table {
 
 body {
   height: 100%;
-  background-image: url(../resources/background.png);
+  background-image: url(../resources/backgroundVeritical.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 header {
+  visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 25%;
 }
 header ul {
   display: flex;
@@ -90,13 +92,13 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 30%;
 }
 main h1 {
   color: whitesmoke;
   font-size: 40px;
-  padding-top: 10rem;
-  padding-bottom: 2rem;
   font-family: "Chonburi", cursive;
+  padding-bottom: 3rem;
 }
 main button {
   background-color: inherit;
@@ -107,6 +109,54 @@ main button {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 main button:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+form {
+  padding-top: 25%;
+  padding-bottom: 25%;
+  background-color: rgba(232, 230, 239, 0.69);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+form label {
+  font-size: 40px;
+  color: #444c53;
+}
+form input {
+  width: 30%;
+  height: 15%;
+  margin: 1rem;
+  font-size: 20px;
+}
+
+#sign-up {
+  visibility: hidden;
+}
+
+#login {
+  visibility: hidden;
+}
+
+.logout {
+  display: none;
+}
+
+.button {
+  background-color: inherit;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.button:hover {
   background-color: rgba(64, 147, 161, 0.4);
   box-shadow: 0px 15px 20px black;
   color: #fff;

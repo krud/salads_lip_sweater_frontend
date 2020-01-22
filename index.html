@@ -9,22 +9,43 @@
     <title>Salads & Lip Sweaters</title>
 </head>
 <body>
-    <header>
-        <ul>
-            <li><a href="/puckhead.html">Puck Head</a></li>
-            <li><a href="/airhockey.html">Muppet Hockey</a></li>
-            <li><a href="/otrail.html">Journey to the O</a></li>
-            <li><a href="#">Don't Drink the Punch</a></li>
-            <li><a href="#">Ice Ice Baby</a></li>
-        </ul>
-    </header>
     <main>
+        <header>
+            <ul>
+                <li><a href="/puckhead.html">Puck Head</a></li>
+                <li><a href="/airhockey.html">Muppet Hockey</a></li>
+                <li><a href="/otrail.html">Journey to the O</a></li>
+                <li><a href="#">Don't Drink the Punch</a></li>
+                <li><a href="#">Ice Ice Baby</a></li>
+            </ul>
+        </header>
+    
         <h1>Salads & Lip Sweaters</h1>
         <div>
-            <button>Login</button>
-            <button>Sign Up</button>
+            <button class="login">Login</button>
+            <button class="sign-up">Sign Up</button>
+            <button class="logout">Logout</button>
         </div>
     </main>
+
+    <section>
+        <form id="login">
+            <label>Username</label>
+            <input type="text" name="username" require>
+            <label>Password</label>
+            <input type="text" name="password" require>
+            <input type="submit" value="Login!" class="button">
+        </form>
+        <form id="sign-up">
+            <label>Name</label>
+            <input type="text" name="name" require>
+            <label>Username</label>
+            <input type="text" name="username" require>
+            <label>Password</label>
+            <input type="text" name="password" require>
+            <input type="submit" value="Sign up!" class="button">
+        </form>
+    </section>
 </body>
 </html>
 

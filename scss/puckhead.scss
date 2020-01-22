@@ -29,6 +29,10 @@ header{
         text-decoration: none;
         color: whitesmoke;
     }
+    div{
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+    }
 }
 
 .game{
@@ -41,6 +45,9 @@ header{
     min-height: 30rem;
     // height: 30rem;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+    // img{
+    //     display: inline-block;
+    // }
 }
 
 .category-dropdown{
@@ -116,6 +123,7 @@ header{
     margin: 1rem;
     height: 2rem;
     width: 2rem;
+    background-color: inherit;
 } 
 
 .helpers{
@@ -160,4 +168,9 @@ img{
 .img-div{
     display: flex;
     justify-content: center;
+}
+
+footer{
+    padding: 10%;
+    height: 25%;
 }
