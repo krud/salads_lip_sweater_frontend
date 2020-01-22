@@ -9,8 +9,7 @@
   
 body{
     height: 100%;
-    // background: url(https://images.unsplash.com/photo-1492232093388-4d9d123d362d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80);
-    background-image: url(../resources/background.png);
+    background-image: url(../resources/backgroundVeritical.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -19,6 +18,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 25%;
     ul{
         display: flex;
         flex-direction: row;
@@ -30,7 +30,6 @@ header{
                 color: whitesmoke;
                 font-family: 'Poppins', sans-serif;
                 &:hover {
-                    // color: rgba(50, 50, 50, 0.25);
                     background-color: rgba(64, 147, 161, 0.4);
                     padding: .5rem;
                     border: 1px solid whitesmoke;
@@ -41,17 +40,19 @@ header{
 }
 
 main{
+    // background-image: url(../resources/background.png);
+    // background-repeat: no-repeat;
+    // background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 30%;
     h1{
         color: whitesmoke;
         font-size: 40px;
-        padding-top: 10rem;
-        padding-bottom: 2rem;
-        // font-family: 'Limelight', cursive;
         font-family: 'Chonburi', cursive;
+        padding-bottom: 3rem;
     }
     button{
         background-color: inherit;
@@ -69,6 +70,35 @@ main{
     }
 }
 
+form {
+    padding-top: 25%;
+    padding-bottom: 25%;
+    background-color: rgba(232, 230, 239, 0.69);
+    label{
+        font-size: 40px;
+        font-family: 'Poppins', sans-serif;
+        color: rgba(68, 76, 83);
+    }
+    // color: rgba(64, 147, 161, 0.4);
+    border: 3px solid red;
+    display: none;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+// #sign-up{
+//     visibility: hidden;
+//     display: ;
+// }
+// #login{
+//     visibility: hidden;
+// }
+
+.logout{
+    // visibility: hidden;
+    display: none;
+}
 
 // font-family: 'Chonburi', cursive;
 // font-family: 'Limelight', cursive;
