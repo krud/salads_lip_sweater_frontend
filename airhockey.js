@@ -67,8 +67,10 @@ function Mallet(){
     this.velocityX = 0;
     this.velocityY = 0;
     this.maxSpeed = 5;
-    this.frictionX = 0.997;
-    this.frictionY = 0.997;
+//     this.frictionX = 0.997;
+    this.frictionX = 0.96;
+//     this.frictionY = 0.997;
+    this.frictionY = 0.96;
     this.acceleration = 1;
     this.color = '#000000';
     this.score = 0 
@@ -79,18 +81,19 @@ function Mallet(){
     this.keepPuckInTable = puckyPuck;
 
     this.malletCollision = hit;
+    this.computerPlayer = aiPlayer;
 }
 
 function drawMallet(){
     tableContext.shadowColor = 'rgba(50, 50, 50, 0.25)';
-        tableContext.shadowOffsetX = 0;
-        tableContext.shadowOffsetY = 1;
-        tableContext.shadowBlur = .5;
-    
-        tableContext.beginPath();
-        tableContext.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        tableContext.fillStyle = this.color;
-        tableContext.fill();
+    tableContext.shadowOffsetX = 0;
+    tableContext.shadowOffsetY = 1;
+    tableContext.shadowBlur = 0.1;
+
+    tableContext.beginPath();
+    tableContext.arc(this.x, this.y, this.radius, 0, 3 * Math.PI, false);
+    tableContext.fillStyle = this.color;
+    tableContext.fill();
 }
 
 function moveMallet(){
@@ -219,15 +222,45 @@ function hit() {
     }
 }
 
+function aiPlayer() {
+        if (puck.y > (tableCenterY - 20) && controllerTwo.y > (tableCenterY + controllerTwo.radius * 2)) {
+
+                if ((puck.x + puck.radius) < controllerTwo.x) {
+                        controllerTwo.velocityX -= controllerTwo.acceleration;
+                } else {
+                        controllerTwo.velocityX += controllerTwo.acceleration;
+                }
+                
+                if (puck.y < controllerTwo.y) {
+                        controllerTwo.velocityY -= controllerTwo.acceleration;
+                } else {
+                        controllerTwo.velocityY += controllerTwo.acceleration;
+                }
+
+        } else {
+
+                if (controllerTwo.x > (controllerTwo.startingPosX - 50) && controllerTwo.x < (controllerTwo.startingPosX + 50)) {
+                        controllerTwo.velocityX = 0;
+                } else if (controllerTwo.x < (controllerTwo.startingPosX - 80)) {
+                        controllerTwo.velocityX += controllerTwo.acceleration;
+                } else {
+                        controllerTwo.velocityX -= controllerTwo.acceleration;
+                }
+
+        }
+
+}
+
 function createPlayers(){
     puck = new Mallet();
 
     controller = new Mallet();
     controller.color = 'rgb(127, 33, 204)';
     controller.radius += 2;
-    controller.acceleration = 0.2;
+    controller.acceleration = 0.1;
     controller.startingPosY = 5;
     controller.mass = 50;
+    controller.maxSpeed = 3;
     controller.y = controller.startingPosY;
 
     controllerTwo = new Mallet();
@@ -236,6 +269,7 @@ function createPlayers(){
     controllerTwo.mass = 50;
     controllerTwo.startingPosY = (tableHeight - 5);
     controllerTwo.acceleration = 0.2;
+    controller.maxSpeed = 3;
     controllerTwo.y = controllerTwo.startingPosY;
 
     controllers.push(controller, controllerTwo);
@@ -261,11 +295,12 @@ function playGame(){
     controller.containController();
     
     controllerTwo.draw();
-		// controllerTwo.computerPlayer();
+    controllerTwo.computerPlayer();
     controllerTwo.move();
     controllerTwo.containController();
 
     let start = requestAnimationFrame(playGame);
+
     console.log("winner", score)
     if (score[0] === 7){
         console.log("winner", score)
