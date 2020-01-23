@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/puckhead.css">
+    <link rel="stylesheet" href="styles/otrail.css">
     <script src="otrail.js"></script>
     <title>Journey to the O</title>
 </head>
@@ -16,6 +16,27 @@
         <h2></h2>
     </header>
     <div class="game">
+        <button class="start">Start</button>
+        <div class="career">
+            <h3>Many kinds of people made it to the Show</h3>
+            <select>
+                <option value="0">You May:</option>
+                <option value="1">Be a goon from Winnipeg</option>
+                <option value="2">Be a multi-sport athlete from Milton</option>
+                <option value="3">Be an import from Moscow</option>
+                <option value="4">Learn the differences between them.</option>
+            </select>
+        </div>
+
+        <form id="party">
+            <label>Pick a wagon leader & 4 friends</label>
+            <input type="text" name="wagon-leader" require>
+            <input type="text" name="member1" require>
+            <input type="text" name="member2" require>
+            <input type="text" name="member3" require>
+            <input type="text" name="member4" require>
+            <input type="submit" value="Let's Go!" class="button">
+        </form>
     </div>
     
 </body>

@@ -12,11 +12,14 @@ let controllers = [];
 let goal;
 let goalHeight;
 let goalPosTop;
-let score = [];
 
 let controller;
 let controllerTwo;
 let puck;
+
+let score = [];
+let userScore = 0;
+let computerScore = 0;
 
 // function postLoad() {
 //     play();
@@ -32,6 +35,10 @@ let puck;
 //     // messageBoard.style.visibility = "hidden";
 
 //     context = document.querySelector("#canvas").getContext('2d')
+function scoreBoard(){
+   let scores = document.querySelector('h2')
+   scores.textContent = `Score: ${userScore} - ${computerScore}`
+}
 
 function createVaribles(){
     table = document.getElementById("canvas");
@@ -55,7 +62,7 @@ function Mallet(){
     this.startingPosY = tableCenterY;
     this.x = this.startingPosX;
     this.y = this.startingPosY;
-    this.radius = 3;
+    this.radius = 2;
     this.mass = 50;
     this.velocityX = 0;
     this.velocityY = 0;
@@ -64,6 +71,7 @@ function Mallet(){
     this.frictionY = 0.997;
     this.acceleration = 1;
     this.color = '#000000';
+    this.score = 0 
 
     this.containController = keepControllerInTable
     this.draw = drawMallet;
@@ -137,7 +145,15 @@ function puckyPuck() {
             
         if (this.x > (goalPosRight + puck.radius) && this.x < (goalPosRight + goalWidth) - puck.radius) {
             puck = new Mallet(tableCenterX, tableCenterY);
-            console.log("scored")
+            if (this.y === puck.radius){
+                computerScore = computerScore + 1
+                score = [userScore, computerScore]
+                scoreBoard();
+            } else {
+                userScore = userScore + 1
+                score = [userScore, computerScore]
+                scoreBoard();
+            }
         } else {
             this.velocityY = -this.velocityY;
         }
@@ -145,65 +161,52 @@ function puckyPuck() {
 }
 
 function hit() {
-    // Loop over two controllers to see if puck has come in contact
     for (var i = 0; i < controllers.length; i++) {
             
-        // Minus the x pos of one disc from the x pos of the other disc
         var distanceX = this.x - controllers[i].x;
-                // Minus the y pos of one disc from the y pos of the other disc
-        var distanceY = this.y - controllers[i].y;
-                // Multiply each of the distances by this
-                // Squareroot that number, which gives you the distance between the two disc's
-        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-                // Add the two disc radius together
-        var addedRadius = this.radius + controllers[i].radius;
 
-        // Check to see if the distance between the two circles is smaller than the added radius
-        // If it is then we know the circles are overlapping								
+        var distanceY = this.y - controllers[i].y;
+
+        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        var addedRadius = this.radius + controllers[i].radius;
+								
         if (distance < addedRadius) {
-                
-                // Had help from Reddit user Kraft_Punk on the below collision math
-            
-                //calculate angle, sine, and cosine
+
                 var angle = Math.atan2(distanceY, distanceX);
                 var sin = Math.sin(angle);
                 var cos = Math.cos(angle);
-                        //rotate controllers[i]'s position
+
                 var pos0 = {
                                 x: 0,
                                 y: 0
                         };
-                        //rotate this's position
+
                 var pos1 = rotate(distanceX, distanceY, sin, cos, true);
-                        //rotate controllers[i]'s velocity
+
                 var vel0 = rotate(controllers[i].velocityX, controllers[i].velocityY, sin, cos, true);
-                        //rotate this's velocity
+
                 var vel1 = rotate(this.velocityX, this.velocityY, sin, cos, true);
-                        //collision reaction
                 var velocityXTotal = vel0.x - vel1.x;
 
                 vel0.x = ((controllers[i].mass - this.mass) * vel0.x + 2 * this.mass * vel1.x) /
                         (controllers[i].mass + this.mass);
                 vel1.x = velocityXTotal + vel0.x;
 
-                //update position - to avoid objects becoming stuck together
                 var absV = Math.abs(vel0.x) + Math.abs(vel1.x),
                         overlap = (controllers[i].radius + this.radius) - Math.abs(pos0.x - pos1.x);
 
                 pos0.x += vel0.x / absV * overlap;
                 pos1.x += vel1.x / absV * overlap;
 
-                //rotate positions back
                 var pos0F = rotate(pos0.x, pos0.y, sin, cos, false),
                         pos1F = rotate(pos1.x, pos1.y, sin, cos, false);
 
-                //adjust positions to actual screen positions
                 this.x = controllers[i].x + pos1F.x;
                 this.y = controllers[i].y + pos1F.y;
                 controllers[i].x = controllers[i].x + pos0F.x;
                 controllers[i].y = controllers[i].y + pos0F.y;
 
-                //rotate velocities back
                 var vel0F = rotate(vel0.x, vel0.y, sin, cos, false),
                         vel1F = rotate(vel1.x, vel1.y, sin, cos, false);
 
@@ -212,7 +215,6 @@ function hit() {
 
                 this.velocityX = vel1F.x;
                 this.velocityY = vel1F.y;
-
         }
     }
 }
@@ -251,10 +253,9 @@ function playGame(){
 
     puck.draw();
     puck.move();
-	puck.malletCollision();
+    puck.malletCollision();
     puck.keepPuckInTable();
         
-		// Controllers
     controller.draw();
     controller.move();
     controller.containController();
@@ -262,9 +263,18 @@ function playGame(){
     controllerTwo.draw();
 		// controllerTwo.computerPlayer();
     controllerTwo.move();
-	controllerTwo.containController();
+    controllerTwo.containController();
 
-    requestAnimationFrame(playGame);
+    let start = requestAnimationFrame(playGame);
+    console.log("winner", score)
+    if (score[0] === 7){
+        console.log("winner", score)
+        cancelAnimationFrame(start)
+    }
+    if (score[1] === 7){
+        console.log("loser") 
+        cancelAnimationFrame(start) 
+    }
 }
 
 document.addEventListener("keydown", function(e) {
