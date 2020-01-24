@@ -239,7 +239,7 @@ function dragEvents(){
 
     document.addEventListener("dragenter", function(event) {
         if (event.target.className == "dropzone") {
-            event.target.style.background = "purple";
+            event.target.style.background = "rgba(175, 7, 7, 0.69)";
           }
         
     }, false);

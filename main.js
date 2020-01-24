@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", postLoad);
 
 const loginURL = 'http://localhost:3000/login';
-const usersURL = 'http://localhost:3000/users';
+const usersURL = 'http://localhost:3000/users/';
 const mainURL = 'http://localhost:3001/';
 let login;
 let signUp;
 let logout;
+let startingButtons;
+let loggedInButtons;
+let currentUserId;
+let deleteButton;
 let header;
 
 function postLoad() {
@@ -14,6 +18,7 @@ function postLoad() {
     signUp = document.querySelector('.sign-up');
     signUpForm = document.getElementById('sign-up');
     logout = document.querySelector('.logout')
+    deleteButton = document.querySelector('.delete-account')
     header = document.querySelector('header')
 
     checkUser();
@@ -22,41 +27,57 @@ function postLoad() {
 
 function checkUser(){
     if(localStorage.token){
-        logout.style.display = "block"
-        login.style.display = "none"
-        signUp.style.display = "none"
-        // loginForm.style.display = "none"
-        loginForm.style.visibility = "hidden"
-        // signUpForm.style.display = "none"
-        signUpForm.style.visibility = "hidden"
-        header.style.visibility = "visible"
+        hidelogInButtons();
+        scrollToTop();
+        showloggedInButtons();
 
-        scrollToTop(header)
+        currentUserId = localStorage.getItem('id')
+        const currentUser = localStorage.getItem('name')
+        const currentToken = localStorage.getItem('token')
 
+        // displayUserStats();
+
+        deleteButton.addEventListener('click', () => deleteAccount(event))
         logout.addEventListener('click', () => logoutUser(event))
     }
+}
+
+function hidelogInButtons(){
+    loggedInButtons = document.querySelector('.logged-in-buttons')
+    
+    loggedInButtons.style.display = "block"
+    loginForm.style.visibility = "hidden"
+    signUpForm.style.visibility = "hidden"
+}
+
+function showloggedInButtons(){
+    startingButtons = document.querySelector('.starting-buttons')
+
+    startingButtons.style.display = "none"
+    header.style.visibility = "visible"
 }
   
 function logoutUser(event){
     event.preventDefault();
 
     localStorage.clear();
-    // localStorage.removeItem('token')
-    // localStorage.removeItem('username')
-    // localStorage.removeItem('password')
-    // localStorage.removeItem('name')
-    // localStorage.removeItem('id')
 
     logout.style.visibility = "none"
     login.style.visibility = "block"
     signUp.style.visibility = "block"
 
-
-    // logout.style.visibility = "none"
-    // login.style.visibility = "block"
-    // signUp.style.visibility = "block"
-
     reloadPage();
+}
+
+function deleteAccount(event){
+    event.preventDefault();
+
+    loggedInButtons.style.display = "none"
+    startingButtons.style.display = "block"
+
+    localStorage.clear();
+    reloadPage();
+    deleteUser(currentUserId);
 }
 
 function eventListeners(){
@@ -69,17 +90,17 @@ function eventListeners(){
 
 function scrollToForm(form) {
     // make it so if login is chosen and then sign up only one shows 
-    // form.style.display = "block"
     form.style.visibility = "visible"
     form.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
   }
 
-function scrollToTop(form){
-    form.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+function scrollToTop(){
+    header.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
 }
 
 function loginUser(event){
     event.preventDefault();
+    loginForm.style.visibility = "hidden"
 
     const formData = new FormData(event.target)
     const username = formData.get('username')
@@ -112,12 +133,20 @@ function signUpUser(event){
     // reloadPage();
 }
 
+function displayUserStats(){
+    console.log("hit")
+}
+
+function deleteUser(id){
+    fetchCall(`${usersURL}${id}`, 'DELETE')
+}
+
 function reloadPage(){
     window.location.replace(mainURL)
 }
 
 function extractData(result){
-    return result.error ? (alert(result.error)) : (localStorage.setItem('token', result.token), localStorage.setItem('username', result.user.username), localStorage.setItem('name', result.user.name), localStorage.setItem('id', result.user.id), localStorage.setItem('puckhead points', result.user.puckheadTotalPoints))
+    return result.error ? (alert(result.error)) : (localStorage.setItem('token', result.token), localStorage.setItem('username', result.user.username), localStorage.setItem('name', result.user.name), localStorage.setItem('id', result.user.id), localStorage.setItem('puckhead total points', result.user.puckheadTotalPoints))
 }
 
 function fetchCall(url, method, body) {

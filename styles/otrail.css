@@ -126,4 +126,15 @@ form input {
   transform: translateY(-7px);
 }
 
+footer {
+  background-color: whitesmoke;
+  padding: 1%;
+  color: rgba(64, 147, 161, 0.77);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
 /*# sourceMappingURL=otrail.css.map */

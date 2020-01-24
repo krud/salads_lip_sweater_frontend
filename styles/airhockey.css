@@ -227,19 +227,25 @@ a:hover, a:focus {
 }
 
 .message-board {
-  left: 50%;
-  margin-left: -35%;
+  right: 20%;
   background-image: url(https://images.unsplash.com/photo-1541138858526-9f296df15693?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
   text-align: center;
-  min-height: 35rem;
-  top: 20rem;
-  width: 70%;
+  min-height: 20rem;
+  top: 18rem;
+  padding-top: 2rem;
+  width: 60%;
   border: 0.2rem solid #86633b;
   border-radius: 1rem;
   box-shadow: inset 2px 2px 70px 1px rgba(239, 177, 104, 0.9), 0 2px 50px 0 #444;
+}
+.message-board p {
+  font-family: "Poppins", sans-serif;
+  padding: 0.5rem;
+  color: whitesmoke;
+  font-size: 22px;
 }
 
 .start {
@@ -252,11 +258,47 @@ a:hover, a:focus {
   font-family: "Poppins", sans-serif;
 }
 
-p {
-  margin-top: 2rem;
+main {
+  height: 100%;
+}
+
+.message-board-end {
+  right: 20%;
+  background-image: url(https://images.unsplash.com/photo-1541138858526-9f296df15693?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  text-align: center;
+  min-height: 20rem;
+  top: 18rem;
+  width: 60%;
+  border: 0.2rem solid #86633b;
+  border-radius: 1rem;
+  box-shadow: inset 2px 2px 70px 1px rgba(239, 177, 104, 0.9), 0 2px 50px 0 #444;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.message-board-end p {
+  font-family: "Poppins", sans-serif;
+  padding: 1rem;
   color: whitesmoke;
   font-size: 22px;
+}
+
+footer {
+  background-color: whitesmoke;
+  padding: 1%;
+  color: rgba(64, 147, 161, 0.77);
   font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  margin-top: 45rem;
+  position: absolute;
+  width: 100%;
 }
 
 /*# sourceMappingURL=airhockey.css.map */

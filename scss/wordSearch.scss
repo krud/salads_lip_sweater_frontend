@@ -1,0 +1,63 @@
+@import "reset";
+@import url('https://fonts.googleapis.com/css?family=Chonburi|Limelight|Poppins|Raleway|Roboto+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+}
+  
+body{
+    height: 100%;
+    background-image: url(../resources/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem;
+    color: whitesmoke;
+    h1{
+        font-size: 40px;
+        font-family: 'Chonburi', cursive;
+    }
+    a{
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        color: whitesmoke;
+    }
+    div{
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+    }
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
+    padding: 2rem;
+    min-height: 30rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+    h2{
+        font-family: 'Poppins', sans-serif;
+        color: whitesmoke;
+        font-size: 40px;
+    }
+}
+
+footer{
+    background-color: whitesmoke;
+    padding: 1%;
+    color: rgba(64, 147, 161, 0.77);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
