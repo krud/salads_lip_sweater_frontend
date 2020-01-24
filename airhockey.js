@@ -88,7 +88,7 @@ function drawMallet(){
     tableContext.shadowColor = 'rgba(50, 50, 50, 0.25)';
     tableContext.shadowOffsetX = 0;
     tableContext.shadowOffsetY = 1;
-    tableContext.shadowBlur = 0.1;
+//     tableContext.shadowBlur = 0;
 
     tableContext.beginPath();
     tableContext.arc(this.x, this.y, this.radius, 0, 3 * Math.PI, false);

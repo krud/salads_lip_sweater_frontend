@@ -185,6 +185,11 @@ header div {
 .hint-card {
   visibility: hidden;
 }
+.hint-card p {
+  margin-top: 1rem;
+  color: whitesmoke;
+  font-family: "Poppins", sans-serif;
+}
 
 .clue {
   background-image: url("https://icons-for-free.com/iconfiles/png/512/idea+idea+bulb+light+bulb+icon-1320144733751939202.png");

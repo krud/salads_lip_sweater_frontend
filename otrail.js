@@ -11,6 +11,10 @@ let goon3;
 let goon4;
 let leader;
 
+let goon;
+let athletic;
+let foreigner;
+let learn;
 
 
 function createGame(){
@@ -82,4 +86,38 @@ function startGame(){
     event.target.style.visibility = "hidden"
     // chosenWagon.style.visibility = "visible"
     career.style.visibility = "visible"
+
+    pickPlayer();
+}
+
+function pickPlayer(){
+    goon = document.querySelector('#goon')
+    athletic = document.querySelector('#athletic')
+    foreigner = document.querySelector('#foreigner')
+    learn = document.querySelector('#learn')
+
+    goon.addEventListener('click', goonPicked);
+    athletic.addEventListener('click', athleticPicked);
+    foreigner.addEventListener('click', foreignerPicked);
+    learn.addEventListener('click', learnPicked);
+}
+
+function goonPicked(){
+    event.preventDefault();
+    console.log("goon")
+}
+
+function athleticPicked(){
+    event.preventDefault();
+    console.log("athletic")
+}
+
+function foreignerPicked(){
+    event.preventDefault();
+    console.log("foreigner")
+}
+
+function learnPicked(){
+    event.preventDefault();
+    console.log("learn")
 }
