@@ -216,13 +216,9 @@ function resetPlayer(player){
     correct.remove()
     buttons.remove()
     myletters = []
+    myHints.remove()
     createVariables(player)
-    console.log(selectedPlayers)
 }
-
-// function createClues(player){
-
-// }
 
 function dragEvents(){
     let dragged;
@@ -243,7 +239,7 @@ function dragEvents(){
 
     document.addEventListener("dragenter", function(event) {
         if (event.target.className == "dropzone") {
-            event.target.style.background = "purple";
+            event.target.style.background = "rgba(175, 7, 7, 0.69)";
           }
         
     }, false);
@@ -286,17 +282,16 @@ function check(){
                 points = points + answer.length
                 createPoints();
                 gameOver(points);
-                console.log("game winner")
             } else {
-                console.log("FUCK Yes!")
                 console.log("game", selectedPlayers.length)
+                hintCard.style.visibility = "hidden"
                 correct.remove()
                 buttons.remove()
                 myletters = []
                 myHints.remove()
                 points = points + answer.length
                 
-                counter2 = counter2 + 22
+                counter2 = counter2 + 1
                 startGame(selectedPlayers[counter2])
             }
         }
@@ -323,9 +318,6 @@ function gameOver(){
     
     fetchCall(gameURL, 'POST', body)
 }
-
-
-//helpers
 
 function parseJSON(response){
     return response.json();

@@ -6,14 +6,14 @@ $blue:#304f86a2;
 $black: #2e2e2e;
 $grey: #F1F0F4;
 $grey-dark: #7A7A7A;
-$line-width: .4rem;
+$line-width: .3rem;
 $blue-line-pos: 36%;
-$circle-center-size: 9rem;
-$goal-size: 12rem;
+$circle-center-size: 5rem;
+$goal-size: 7rem;
 
-$table-width: 30rem;
-$table-height: 60rem;
-$table-border: .7rem;
+$table-width: 20rem;
+$table-height: 40rem;
+$table-border: .5rem;
 $table-border-2x: $table-border * 2;
 
 $table-faceoff-size: 5rem;
@@ -46,20 +46,13 @@ header{
         font-family: 'Poppins', sans-serif;
         text-decoration: none;
         color: whitesmoke;
-    }
+	}
+	h2{
+		font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        color: whitesmoke;
+	}
 }
-
-// .game{
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     margin: 5rem;
-//     padding: 2rem;
-//     min-height: 30rem;
-//     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
-//     border: 15px;
-// }
 
 a {
 	color: $grey-dark;
@@ -90,7 +83,7 @@ a {
     margin-bottom: ($table-height / 8);			
 	margin-left: -($table-width / 2);
 	position: absolute;
-	top: 10%;
+	top: 5%;
     left: 50%;
     background-color: rgba(255, 255, 255, 0.39);
 	border: $table-border solid $black;
@@ -113,8 +106,8 @@ a {
 .table-canvas {
     width: $table-width - $table-border-2x;
     height: $table-height - $table-border-2x + .04;
-    margin-top: 8.2rem;			
-	margin-left: -14.3rem;
+    margin-top: 5.45rem;			
+	margin-left: -9.5rem;
 	background-color: transparent;
 	border-radius: 4.2rem;
 	border: none;
@@ -156,7 +149,7 @@ a {
 	left: 0;
 	top: 0;
 	margin-top: -($goal-size/2);
-	margin-left: ($goal-size/2) + 2.1;
+	margin-left: ($table-width/2) - ($goal-size/2) - .2;
 	width: $goal-size;
 	height: $goal-size;
 	background-color:#304f864d;
@@ -207,16 +200,22 @@ a {
 }
 
 .message-board {
-    left: 50%;
-    margin-left: -35%;
+	p{
+		font-family: 'Poppins', sans-serif;
+		padding: 0.5rem;
+		color: whitesmoke;
+		font-size: 22px;
+	}
+    right: 20%;
     background-image: url(https://images.unsplash.com/photo-1541138858526-9f296df15693?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
     text-align: center;
-    min-height: 35rem;
-    top: 20rem;
-    width: 70%;
+    min-height: 20rem;
+	top: 18rem;
+	padding-top: 2rem;
+    width: 60%;
     border: 0.2rem solid #86633b;
     border-radius: 1rem;
     box-shadow: inset 2px 2px 70px 1px rgba(239, 177, 104, 0.9), 0 2px 50px 0 #444;
@@ -232,9 +231,45 @@ a {
     font-family: 'Poppins', sans-serif;
 }
 
-p{
-    margin-top: 2rem;
-    color: whitesmoke;
-    font-size: 22px;
+main{
+	height: 100%;
+}
+
+.message-board-end{
+	p{
+		font-family: 'Poppins', sans-serif;
+		padding: 1rem;
+		color: whitesmoke;
+		font-size: 22px;
+	}
+    right: 20%;
+    background-image: url(https://images.unsplash.com/photo-1541138858526-9f296df15693?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    text-align: center;
+    min-height: 20rem;
+	top: 18rem;
+    width: 60%;
+    border: 0.2rem solid #86633b;
+    border-radius: 1rem;
+    box-shadow: inset 2px 2px 70px 1px rgba(239, 177, 104, 0.9), 0 2px 50px 0 #444;
+	visibility: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+footer{
+    background-color: whitesmoke;
+    padding: 1%;
+    color: rgba(64, 147, 161, 0.77);
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+	font-size: 12px;
+	margin-top: 45rem;
+	position: absolute;
+	width: 100%;
 }

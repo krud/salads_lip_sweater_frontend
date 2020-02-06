@@ -42,12 +42,8 @@ header{
     align-items: center;
     margin: 5rem;
     padding: 2rem;
-    min-height: 30rem;
-    // height: 30rem;
+    min-height: 40rem;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
-    // img{
-    //     display: inline-block;
-    // }
 }
 
 .category-dropdown{
@@ -86,6 +82,8 @@ header{
     justify-content: space-evenly;
     flex-wrap: wrap;
     text-align: center;
+    max-width: 50rem;
+    padding-bottom: 2rem;
 }
 
 #draggable{
@@ -141,6 +139,11 @@ header{
 
 .hint-card{
     visibility: hidden;
+    p{
+        margin-top: 1rem;
+        color: whitesmoke;
+        font-family: 'Poppins', sans-serif;
+    }
 }
 
 .clue{
@@ -171,6 +174,12 @@ img{
 }
 
 footer{
-    padding: 10%;
-    height: 25%;
+    background-color: whitesmoke;
+    padding: 1%;
+    color: rgba(64, 147, 161, 0.77);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 }

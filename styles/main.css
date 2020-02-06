@@ -61,12 +61,26 @@ body {
   background-size: cover;
 }
 
+.logo {
+  background-image: url(../resources/logo.png);
+  background-repeat: no-repeat;
+  background-size: 18rem;
+  background-position: right;
+  min-height: 20rem;
+  min-width: 30rem;
+  padding-top: 9%;
+}
+.logo h1 {
+  text-indent: 4rem;
+  font-size: 60px;
+}
+
 header {
   visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 25%;
+  padding-bottom: 18%;
 }
 header ul {
   display: flex;
@@ -98,7 +112,6 @@ main h1 {
   color: whitesmoke;
   font-size: 40px;
   font-family: "Chonburi", cursive;
-  padding-bottom: 3rem;
 }
 main button {
   background-color: inherit;
@@ -136,16 +149,16 @@ form input {
   font-size: 20px;
 }
 
-#sign-up {
-  visibility: hidden;
+.logged-in-buttons {
+  display: none;
 }
 
 #login {
   visibility: hidden;
 }
 
-.logout {
-  display: none;
+#sign-up {
+  visibility: hidden;
 }
 
 .button {
@@ -161,6 +174,18 @@ form input {
   box-shadow: 0px 15px 20px black;
   color: #fff;
   transform: translateY(-7px);
+}
+
+footer {
+  background-color: whitesmoke;
+  padding: 1%;
+  color: rgba(64, 147, 161, 0.77);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  width: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */

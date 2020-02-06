@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", createGame);
-
-// issue with conversion from cartesan <-> polar coordinates
+document.addEventListener("DOMContentLoaded", postLoad);
 
 let table;
 let tableContext;
@@ -12,26 +10,36 @@ let controllers = [];
 let goal;
 let goalHeight;
 let goalPosTop;
-let score = [];
 
-let controller;
-let controllerTwo;
+let computer;
+let player;
 let puck;
 
-// function postLoad() {
-//     play();
-//     // messageBoard = document.querySelector(".message-board");
-//     // let startButton = document.querySelector(".start");
+let score = [];
+let userScore = 0;
+let computerScore = 0;
 
-//     // startButton.addEventListener("click", startGame)
-//     startGame();
-// }
+let messageBoardEnd;
+let gameOver;
+let message;
 
-// function startGame(){
-//     // event.preventDefault();
-//     // messageBoard.style.visibility = "hidden";
+function postLoad() {
+    messageBoard = document.querySelector(".message-board");
+    let startButton = document.querySelector(".start");
 
-//     context = document.querySelector("#canvas").getContext('2d')
+    startButton.addEventListener("click", startGame)
+}
+
+function startGame(){
+    event.preventDefault();
+    messageBoard.style.visibility = "hidden";
+    createGame();
+}
+
+function scoreBoard(){
+   let scores = document.querySelector('h2')
+   scores.textContent = `Score: ${userScore} - ${computerScore}`
+}
 
 function createVaribles(){
     table = document.getElementById("canvas");
@@ -55,15 +63,18 @@ function Mallet(){
     this.startingPosY = tableCenterY;
     this.x = this.startingPosX;
     this.y = this.startingPosY;
-    this.radius = 3;
+    this.radius = 2;
     this.mass = 50;
     this.velocityX = 0;
     this.velocityY = 0;
     this.maxSpeed = 5;
     this.frictionX = 0.997;
+//     this.frictionX = 0.96;
     this.frictionY = 0.997;
+//     this.frictionY = 0.96;
     this.acceleration = 1;
     this.color = '#000000';
+    this.score = 0 
 
     this.containController = keepControllerInTable
     this.draw = drawMallet;
@@ -71,18 +82,19 @@ function Mallet(){
     this.keepPuckInTable = puckyPuck;
 
     this.malletCollision = hit;
+//     this.computerPlayer = aiPlayer;
 }
 
 function drawMallet(){
     tableContext.shadowColor = 'rgba(50, 50, 50, 0.25)';
-        tableContext.shadowOffsetX = 0;
-        tableContext.shadowOffsetY = 1;
-        tableContext.shadowBlur = .5;
-    
-        tableContext.beginPath();
-        tableContext.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        tableContext.fillStyle = this.color;
-        tableContext.fill();
+    tableContext.shadowOffsetX = 0;
+    tableContext.shadowOffsetY = 1;
+//     tableContext.shadowBlur = 0;
+
+    tableContext.beginPath();
+    tableContext.arc(this.x, this.y, this.radius, 0, 3 * Math.PI, false);
+    tableContext.fillStyle = this.color;
+    tableContext.fill();
 }
 
 function moveMallet(){
@@ -108,11 +120,11 @@ function keepControllerInTable(){
                     this.velocityY = -1;
             }
     };
-    if (controller.y > (tableCenterY - controller.radius) && controller.y < tableCenterY) {
-            controller.velocityY = -2;
+    if (computer.y > (tableCenterY - computer.radius) && computer.y < tableCenterY) {
+            computer.velocityY = -2;
     };
-    if (controllerTwo.y < tableCenterY && controllerTwo.y > (tableCenterY - (controllerTwo.radius / 2))) {
-        controllerTwo.velocityY = +2;
+    if (player.y < tableCenterY && player.y > (tableCenterY - (player.radius / 2))) {
+        player.velocityY = +2;
     };
 }
 
@@ -137,7 +149,15 @@ function puckyPuck() {
             
         if (this.x > (goalPosRight + puck.radius) && this.x < (goalPosRight + goalWidth) - puck.radius) {
             puck = new Mallet(tableCenterX, tableCenterY);
-            console.log("scored")
+            if (this.y === puck.radius){
+                userScore = userScore + 1
+                score = [userScore, computerScore]
+                scoreBoard();
+            } else {
+                computerScore = computerScore + 1
+                score = [userScore, computerScore]
+                scoreBoard();
+            }
         } else {
             this.velocityY = -this.velocityY;
         }
@@ -145,65 +165,52 @@ function puckyPuck() {
 }
 
 function hit() {
-    // Loop over two controllers to see if puck has come in contact
     for (var i = 0; i < controllers.length; i++) {
             
-        // Minus the x pos of one disc from the x pos of the other disc
         var distanceX = this.x - controllers[i].x;
-                // Minus the y pos of one disc from the y pos of the other disc
-        var distanceY = this.y - controllers[i].y;
-                // Multiply each of the distances by this
-                // Squareroot that number, which gives you the distance between the two disc's
-        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-                // Add the two disc radius together
-        var addedRadius = this.radius + controllers[i].radius;
 
-        // Check to see if the distance between the two circles is smaller than the added radius
-        // If it is then we know the circles are overlapping								
+        var distanceY = this.y - controllers[i].y;
+
+        var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        var addedRadius = this.radius + controllers[i].radius;
+								
         if (distance < addedRadius) {
-                
-                // Had help from Reddit user Kraft_Punk on the below collision math
-            
-                //calculate angle, sine, and cosine
+
                 var angle = Math.atan2(distanceY, distanceX);
                 var sin = Math.sin(angle);
                 var cos = Math.cos(angle);
-                        //rotate controllers[i]'s position
+
                 var pos0 = {
                                 x: 0,
                                 y: 0
                         };
-                        //rotate this's position
+
                 var pos1 = rotate(distanceX, distanceY, sin, cos, true);
-                        //rotate controllers[i]'s velocity
+
                 var vel0 = rotate(controllers[i].velocityX, controllers[i].velocityY, sin, cos, true);
-                        //rotate this's velocity
+
                 var vel1 = rotate(this.velocityX, this.velocityY, sin, cos, true);
-                        //collision reaction
                 var velocityXTotal = vel0.x - vel1.x;
 
                 vel0.x = ((controllers[i].mass - this.mass) * vel0.x + 2 * this.mass * vel1.x) /
                         (controllers[i].mass + this.mass);
                 vel1.x = velocityXTotal + vel0.x;
 
-                //update position - to avoid objects becoming stuck together
                 var absV = Math.abs(vel0.x) + Math.abs(vel1.x),
                         overlap = (controllers[i].radius + this.radius) - Math.abs(pos0.x - pos1.x);
 
                 pos0.x += vel0.x / absV * overlap;
                 pos1.x += vel1.x / absV * overlap;
 
-                //rotate positions back
                 var pos0F = rotate(pos0.x, pos0.y, sin, cos, false),
                         pos1F = rotate(pos1.x, pos1.y, sin, cos, false);
 
-                //adjust positions to actual screen positions
                 this.x = controllers[i].x + pos1F.x;
                 this.y = controllers[i].y + pos1F.y;
                 controllers[i].x = controllers[i].x + pos0F.x;
                 controllers[i].y = controllers[i].y + pos0F.y;
 
-                //rotate velocities back
                 var vel0F = rotate(vel0.x, vel0.y, sin, cos, false),
                         vel1F = rotate(vel1.x, vel1.y, sin, cos, false);
 
@@ -212,31 +219,61 @@ function hit() {
 
                 this.velocityX = vel1F.x;
                 this.velocityY = vel1F.y;
-
         }
     }
 }
 
+// function aiPlayer() {
+//         if (puck.y > (tableCenterY - 20) && player.y > (tableCenterY + player.radius * 2)) {
+
+//                 if ((puck.x + puck.radius) < player.x) {
+//                         player.velocityX -= player.acceleration;
+//                 } else {
+//                         player.velocityX += player.acceleration;
+//                 }
+                
+//                 if (puck.y < player.y) {
+//                         player.velocityY -= player.acceleration;
+//                 } else {
+//                         player.velocityY += player.acceleration;
+//                 }
+
+//         } else {
+
+//                 if (player.x > (player.startingPosX - 50) && player.x < (player.startingPosX + 50)) {
+//                         player.velocityX = 0;
+//                 } else if (player.x < (player.startingPosX - 80)) {
+//                         player.velocityX += player.acceleration;
+//                 } else {
+//                         player.velocityX -= player.acceleration;
+//                 }
+
+//         }
+
+// }
+
 function createPlayers(){
     puck = new Mallet();
 
-    controller = new Mallet();
-    controller.color = 'rgb(127, 33, 204)';
-    controller.radius += 2;
-    controller.acceleration = 0.2;
-    controller.startingPosY = 5;
-    controller.mass = 50;
-    controller.y = controller.startingPosY;
+    computer = new Mallet();
+    computer.color = 'rgb(33, 204, 119)';
+    computer.radius += 2;
+    computer.acceleration = 0.1;
+    computer.startingPosY = 5;
+    computer.mass = 50;
+    computer.maxSpeed = 3;
+    computer.y = computer.startingPosY;
 
-    controllerTwo = new Mallet();
-    controllerTwo.color = 'rgb(33, 204, 119)';
-    controllerTwo.radius += 2;
-    controllerTwo.mass = 50;
-    controllerTwo.startingPosY = (tableHeight - 5);
-    controllerTwo.acceleration = 0.2;
-    controllerTwo.y = controllerTwo.startingPosY;
+    player = new Mallet();
+    player.color = 'rgb(127, 33, 204)';
+    player.radius += 2;
+    player.mass = 50;
+    player.startingPosY = (tableHeight - 5);
+    player.acceleration = 0.2;
+    player.maxSpeed = 3;
+    player.y = player.startingPosY;
 
-    controllers.push(controller, controllerTwo);
+    controllers.push(computer, player);
 }
 
 function createGame(){
@@ -251,20 +288,56 @@ function playGame(){
 
     puck.draw();
     puck.move();
-	puck.malletCollision();
+    puck.malletCollision();
     puck.keepPuckInTable();
         
-		// Controllers
-    controller.draw();
-    controller.move();
-    controller.containController();
+    computer.draw();
+    computer.move();
+    computer.containController();
     
-    controllerTwo.draw();
-		// controllerTwo.computerPlayer();
-    controllerTwo.move();
-	controllerTwo.containController();
+    player.draw();
+//     player.computerPlayer();
+    player.move();
+    player.containController();
 
-    requestAnimationFrame(playGame);
+    let start = requestAnimationFrame(playGame);
+
+    gameOver = document.querySelector('.game-over')
+    messageBoardEnd = document.querySelector('.message-board-end')
+    message = document.querySelector('.message')
+
+    if (score[0] === 7){
+        cancelAnimationFrame(start)
+        WinnerBoard();
+    }
+    if (score[1] === 7){
+        cancelAnimationFrame(start) 
+        loserBoard()
+    }
+}
+
+function WinnerBoard(){
+        messageBoardEnd.style.visibility = "visible"
+        gameOver.style.backgroundImage = `url('https://media.giphy.com/media/Urh1hsJw5tX4F53RPT/giphy.gif')`;
+        gameOver.style.backgroundSize = "cover"
+        gameOver.style.backgroundRepeat = "no-repeat"
+        gameOver.style.border = '1px solid whitesmoke'
+        gameOver.style.height = '12rem'
+        gameOver.style.minWidth = '18rem'
+
+        message.textContent = "Congrats Pigeon, you won!"
+}
+
+function loserBoard(){
+        messageBoardEnd.style.visibility = "visible"
+        gameOver.style.backgroundImage = `url('https://media.giphy.com/media/xUNd9HyjXiF2PF3KOk/giphy.gif')`;
+        gameOver.style.backgroundSize = "cover"
+        gameOver.style.backgroundRepeat = "no-repeat"
+        gameOver.style.border = '1px solid whitesmoke'
+        gameOver.style.height = '12rem'
+        gameOver.style.minWidth = '18rem'
+
+        message.textContent = "Need some more practice, Pigeon!"
 }
 
 document.addEventListener("keydown", function(e) {
@@ -272,17 +345,17 @@ document.addEventListener("keydown", function(e) {
 });
 
 function moveController(key) {
-    if (key === 38 && controller.velocityY < controller.maxSpeed) {
-            controller.velocityY -= controller.acceleration;
+    if (key === 38 && player.velocityY < player.maxSpeed) {
+            player.velocityY -= player.acceleration;
     }
-    if (key === 40 && controller.velocityY < controller.maxSpeed) {
-            controller.velocityY += controller.acceleration;
+    if (key === 40 && player.velocityY < player.maxSpeed) {
+            player.velocityY += player.acceleration;
     }
-    if (key === 39 && controller.velocityX < controller.maxSpeed) {
-            controller.velocityX += controller.acceleration;
+    if (key === 39 && player.velocityX < player.maxSpeed) {
+            player.velocityX += player.acceleration;
     }
-    if (key === 37 && controller.acceleration < controller.maxSpeed) {
-            controller.velocityX -= controller.acceleration;
+    if (key === 37 && player.acceleration < player.maxSpeed) {
+            player.velocityX -= player.acceleration;
     }
 }
 

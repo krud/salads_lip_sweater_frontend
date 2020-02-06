@@ -89,7 +89,7 @@ header div {
   align-items: center;
   margin: 5rem;
   padding: 2rem;
-  min-height: 30rem;
+  min-height: 40rem;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -129,6 +129,8 @@ header div {
   justify-content: space-evenly;
   flex-wrap: wrap;
   text-align: center;
+  max-width: 50rem;
+  padding-bottom: 2rem;
 }
 
 #draggable {
@@ -185,6 +187,11 @@ header div {
 .hint-card {
   visibility: hidden;
 }
+.hint-card p {
+  margin-top: 1rem;
+  color: whitesmoke;
+  font-family: "Poppins", sans-serif;
+}
 
 .clue {
   background-image: url("https://icons-for-free.com/iconfiles/png/512/idea+idea+bulb+light+bulb+icon-1320144733751939202.png");
@@ -214,8 +221,14 @@ img {
 }
 
 footer {
-  padding: 10%;
-  height: 25%;
+  background-color: whitesmoke;
+  padding: 1%;
+  color: rgba(64, 147, 161, 0.77);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 
 /*# sourceMappingURL=puckhead.css.map */

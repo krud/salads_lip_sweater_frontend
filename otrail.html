@@ -4,19 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/puckhead.css">
+    <link rel="stylesheet" href="styles/otrail.css">
     <script src="otrail.js"></script>
-    <title>Journey to the O</title>
+    <title>Journey to the Show</title>
 </head>
 <body>
 
     <header>
         <a href="http://localhost:3001/">Home</a>
-        <h1>Journey to the O</h1>
+        <h1>Journey to the Show</h1>
         <h2></h2>
     </header>
+    <div class="game-back"></div>
     <div class="game">
+        <button class="start">Start</button>
+        <div class="career">
+            <h3>Many kinds of people made it to the Show, you may:</h3>
+            <ul>
+                <li id="goon">Be a goon from Winnipeg</li>
+                <li id="athletic">Be a multi-sport athlete from Milton</li>
+                <li id="foreigner">Be an import from Moscow</li>
+                <li id="learn">Learn the differences between them.</li>
+            </ul>
+        </div>
+        <div class="career-info">
+            <p>Trying to make the Show isn't easy. But if you're a Multi-Sport Athlete, you’ll have more resources and connections than a goon or an import. However, the harder you have to try the more points you deserve! Therefore, the import learning a new language earns the greatest number of points.</p>
+            <button class="career-continue">Continue!</button>
+        </div>
+
+        <form id="party">
+            <label>Pick a wagon leader & 4 friends</label>
+            <input type="text" name="wagon-leader" placeholder="wagon leader" require>
+            <input type="text" name="member1" placeholder="member" require>
+            <input type="text" name="member2" placeholder="member" require>
+            <input type="text" name="member3" placeholder="member" require>
+            <input type="text" name="member4" placeholder="member" require>
+            <input type="submit" value="Let's Go!" class="button">
+        </form>
+
+        <div class="junior">
+            <h3>It’s 2028, after killing it at Shattuck-St. Mary's your jumping off place for the NHL is Faribault, Minnesota. You must decide which major junior league to pursue to develope your skills further.</h3>
+            <ul>
+                <li id="QMJHL">play in the QMJHL for the Quebec Remparts</li>
+                <li id="USHL">play in the USHL for the Fargo Force</li>
+                <li id="NCAA">play Collegiate (NCAA) with the U of M</li>
+                <li id="learn-junior">Ask for advice.</li>
+            </ul>
+        </div>
+        <div class="junior-info">
+            <p>You attend a video conference with advice from elite NHL players, such as Nathan Mackinnon and Austin Matthews. Education or risk it all on hockey</p>
+            <button class="junior-continue">Continue!</button>
+        </div>
     </div>
-    
+    <footer id="footer">
+        <p>©Copyright 2050 by Salads & Lip Sweaters. All rights reserved.</p>
+    </footer>
 </body>
 </html>

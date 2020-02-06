@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css?family=Chonburi|Limelight|Poppins|Raleway|Roboto+Mono&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  background-image: url(../resources/backgroundVeritical.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem;
+  color: whitesmoke;
+}
+header h1 {
+  font-size: 40px;
+  font-family: "Chonburi", cursive;
+}
+header a {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: whitesmoke;
+}
+header div {
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+  padding: 4rem;
+  min-height: 30rem;
+  background-color: rgba(232, 230, 239, 0.08);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+.game button {
+  opacity: 1;
+  position: absolute;
+  background-color: inherit;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  color: whitesmoke;
+}
+.game button:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.game-back {
+  background-image: url("https://upload.wikimedia.org/wikipedia/pt/3/3e/05_NHL_Shield.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 15%;
+  min-width: 30rem;
+  min-height: 28rem;
+  background-position: center;
+  position: absolute;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.career-info {
+  display: none;
+  font-size: 22px;
+  font-family: "Poppins", sans-serif;
+  color: whitesmoke;
+  background-color: rgba(232, 230, 239, 0.69);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+  padding: 5%;
+  min-height: 20rem;
+  color: #444c53;
+}
+.career-info button {
+  left: 40%;
+}
+
+form {
+  position: absolute;
+  padding: 5%;
+  background-color: rgba(232, 230, 239, 0.69);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  visibility: hidden;
+}
+form label {
+  font-size: 30px;
+  color: #444c53;
+}
+form input {
+  width: 70%;
+  height: 15%;
+  margin: 0.5rem;
+  font-size: 18px;
+}
+
+.button {
+  background-color: inherit;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.button:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.career {
+  position: absolute;
+  visibility: hidden;
+  padding: 5%;
+  background-color: rgba(232, 230, 239, 0.69);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.career h3 {
+  font-size: 20px;
+  color: #444c53;
+  padding: 5%;
+}
+.career li {
+  padding: 1rem;
+  font-size: 16px;
+  list-style: none;
+  color: #444c53;
+}
+.career li:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.junior {
+  position: absolute;
+  visibility: hidden;
+  padding: 5%;
+  background-color: rgba(232, 230, 239, 0.69);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.junior h3 {
+  font-size: 20px;
+  color: #444c53;
+  padding: 5%;
+}
+.junior li {
+  padding: 1rem;
+  font-size: 16px;
+  list-style: none;
+  color: #444c53;
+}
+.junior li:hover {
+  background-color: rgba(64, 147, 161, 0.4);
+  box-shadow: 0px 15px 20px black;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.junior-info {
+  display: none;
+  font-size: 22px;
+  font-family: "Poppins", sans-serif;
+  color: whitesmoke;
+  background-color: rgba(232, 230, 239, 0.69);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+  padding: 5%;
+  min-height: 20rem;
+  color: #444c53;
+}
+.junior-info button {
+  left: 40%;
+}
+
+footer {
+  background-color: whitesmoke;
+  padding: 1%;
+  color: rgba(64, 147, 161, 0.77);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=otrail.css.map */
