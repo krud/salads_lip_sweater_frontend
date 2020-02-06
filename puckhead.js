@@ -291,7 +291,6 @@ function check(){
                 myHints.remove()
                 points = points + answer.length
                 
-                // counter2 = counter2 + 22
                 counter2 = counter2 + 1
                 startGame(selectedPlayers[counter2])
             }
