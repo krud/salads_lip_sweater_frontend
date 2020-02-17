@@ -43,6 +43,8 @@ Users can create their own account or login via the Guest Account to access all 
 
 Choose a team, guess each player's last name with the letters listed below. Click the magnifing glass for a hint or if you make a spelling error click the refresh button to reset the letters. Please note traded players will be updated after the trade deadline. 
 
+<a href="https://imgflip.com/gif/3phey7"><img src="https://i.imgflip.com/3phey7.gif" title="made at imgflip.com"/></a>
+
 ## Pigeon Hockey
 
 Beta version of classic air hockey!
