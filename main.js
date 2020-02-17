@@ -11,8 +11,10 @@ let loggedInButtons;
 let currentUserId;
 let deleteButton;
 let header;
+let guest;
 
 function postLoad() {
+    guest = document.querySelector('.guest-login');
     login = document.querySelector('.login');
     loginForm = document.getElementById('login');
     signUp = document.querySelector('.sign-up');
@@ -51,7 +53,12 @@ function hidelogInButtons(){
 }
 
 function showloggedInButtons(){
+    currentUserId = localStorage.getItem('id')
     startingButtons = document.querySelector('.starting-buttons')
+
+    if (currentUserId == 30){
+        deleteButton.style.display = "none"
+    } 
 
     startingButtons.style.display = "none"
     header.style.visibility = "visible"
@@ -83,6 +90,7 @@ function deleteAccount(event){
 function eventListeners(){
     login.addEventListener('click', () => scrollToForm(loginForm));
     signUp.addEventListener('click', () => scrollToForm(signUpForm));
+    guest.addEventListener('click', guestLogin)
 
     loginForm.addEventListener('submit', loginUser);
     signUpForm.addEventListener('submit', signUpUser);
@@ -96,6 +104,19 @@ function scrollToForm(form) {
 
 function scrollToTop(){
     header.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+}
+
+function guestLogin(){
+    event.preventDefault();
+
+    const username = 'Guest'
+    const password = 'Guest'
+    const body = JSON.stringify({ user: {username, password} })
+
+    fetchCall(loginURL, 'POST', body)
+        .then(parseJSON)
+        .then(extractData)
+        .then(checkUser)
 }
 
 function loginUser(event){
@@ -146,7 +167,13 @@ function reloadPage(){
 }
 
 function extractData(result){
-    return result.error ? (alert(result.error)) : (localStorage.setItem('token', result.token), localStorage.setItem('username', result.user.username), localStorage.setItem('name', result.user.name), localStorage.setItem('id', result.user.id), localStorage.setItem('puckhead total points', result.user.puckheadTotalPoints))
+    return result.error 
+    ? (alert(result.error)) 
+    : (localStorage.setItem('token', result.token), 
+        localStorage.setItem('username', result.user.username), 
+        localStorage.setItem('name', result.user.name), 
+        localStorage.setItem('id', result.user.id), 
+        localStorage.setItem('puckhead total points', result.user.puckheadTotalPoints))
 }
 
 function fetchCall(url, method, body) {
